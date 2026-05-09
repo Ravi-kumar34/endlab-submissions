@@ -28,7 +28,7 @@ main:
     lla t0,n
     ld s0,0(t0)
 
-    mv a0,s0
+    slli a0,s0,3
     call malloc
     beqz a0,error
 
@@ -36,7 +36,7 @@ main:
     li s3,-1
 loop:
     lla a0,l
-    call printf
+    //call printf
     addi s3,s3,1
     bge s3,s0,smallest
     slli t0,s3,3
@@ -69,13 +69,13 @@ go_left:
     addi s4,s8,-1
     j loop2
 target:
-    addi s6,s6,-1
+    //addi s6,s6,-1
     lla a0,fmt
     lla a1,t
     call scanf
     lla t0,t
     ld s1,0(t0)
-    ble s1,s5,secondhalf
+    blt s1,s5,secondhalf
     li s7,0
     addi s4,s6,-1
     j binary
@@ -93,6 +93,7 @@ binary:
     beq t0,s1,done
     blt t0,s1,go_right
     addi s4,s8,-1
+    j binary
 go_right:
     addi s7,s8,1
     j binary
@@ -102,7 +103,7 @@ done:
     call printf
     call exit
 not_done:
-    mv a1,s8
+    li a1,-1
     lla a0,fmt
     call printf
     call exit
