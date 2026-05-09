@@ -30,7 +30,7 @@ main:
     lla t0,L
     ld s1,0(t0)
 
-    mv a0,s0
+    slli a0,s0,3
     call malloc
     beqz a0,error
 
@@ -39,7 +39,7 @@ main:
 
 loop:
     lla a0,l
-    call printf
+    //call printf
     addi s3,s3,1
     bge s3,s0,work
     slli t0,s3,3
@@ -69,6 +69,7 @@ while:
     addi s4,s4,-1
     add t2,t0,t1
     ble t2,s1,both
+    addi s5,s5,-1
     j while
 both:
     addi s3,s3,1
